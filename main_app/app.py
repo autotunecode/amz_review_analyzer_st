@@ -2,11 +2,14 @@ import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome import service as fs
+from selenium.webdriver import ChromeOptions
 # from webdriver_manager.chrome import ChromeDriverManager, ChromeType
 # Chromium　起動用
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
+
 # from webdriver_manager.chrome import ChromeDriverManager
 # from webdriver_manager.chrome import ChromeDriverManager
 
@@ -25,7 +28,7 @@ def run_scraping_and_analysis(ASIN):
 
         # 　ヘッドレスモードでブラウザを起動
         webdriver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
-        s = Service(webdriver_path)
+        s = fs.Service(webdriver_path)
         options = Options()
         options.add_argument('--headless')
         options.add_argument('--disable-gpu')
@@ -34,7 +37,7 @@ def run_scraping_and_analysis(ASIN):
 
         # ブラウザーを起動
         # driver = webdriver.Chrome(service=s, options=options)
-        driver = webdriver.Chrome(executable_path=webdriver_path)
+        driver = webdriver.Chrome(options=options, service=s)
 
         driver.get(url)
         time.sleep(3)  # 読み込み待ち
