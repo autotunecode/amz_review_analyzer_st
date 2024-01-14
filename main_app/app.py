@@ -2,9 +2,11 @@ import streamlit as st
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager, ChromeType
+# from webdriver_manager.chrome import ChromeDriverManager, ChromeType
 # Chromium　起動用
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.os_manager import ChromeType
 # from webdriver_manager.chrome import ChromeDriverManager
 # from webdriver_manager.chrome import ChromeDriverManager
 
@@ -31,7 +33,8 @@ def run_scraping_and_analysis(ASIN):
         options.add_argument('--disable-dev-shm-usage')
 
         # ブラウザーを起動
-        driver = webdriver.Chrome(service=s, options=options)
+        # driver = webdriver.Chrome(service=s, options=options)
+        driver = webdriver.Chrome(executable_path=webdriver_path)
 
         driver.get(url)
         time.sleep(3)  # 読み込み待ち
