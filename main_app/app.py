@@ -9,7 +9,7 @@ from selenium.webdriver import ChromeOptions
 from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.core.os_manager import ChromeType
-
+from webdriver_manager.utils import ChromeDriverManager, ChromeType
 # from webdriver_manager.chrome import ChromeDriverManager
 # from webdriver_manager.chrome import ChromeDriverManager
 
@@ -27,8 +27,8 @@ def run_scraping_and_analysis(ASIN):
         url = f'https://www.amazon.co.jp/product-reviews/{ASIN}/ref=cm_cr_dp_d_show_all_btm?ie=UTF8&reviewerType=all_reviews&pageNumber={page}'
 
         # 　ヘッドレスモードでブラウザを起動
-        # webdriver_path = ChromeDriverManager(version='120.0.6099.129', chrome_type=ChromeType.CHROMIUM).install()
-        webdriver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install(version='120.0.6099.129')
+        webdriver_manager.utils.clear_cache()
+        webdriver_path = ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()
         s = fs.Service(webdriver_path)
         options = Options()
         options.add_argument('--headless')
